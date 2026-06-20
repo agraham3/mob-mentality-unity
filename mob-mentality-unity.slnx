@@ -1,0 +1,4 @@
+﻿<Solution>
+  <Project Path="MobMentality.Runtime.csproj" />
+  <Project Path="MobMentality.EditModeTests.csproj" />
+</Solution>

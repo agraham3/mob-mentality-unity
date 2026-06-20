@@ -1,0 +1,13 @@
+{
+  "name": "MobMentality.EditModeTests",
+  "rootNamespace": "MobMentality.Tests",
+  "references": [
+    "MobMentality.Runtime"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "optionalUnityReferences": [
+    "TestAssemblies"
+  ]
+}
