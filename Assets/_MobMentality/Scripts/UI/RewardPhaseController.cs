@@ -26,7 +26,7 @@ namespace MobMentality.UI
         public void Show(IReadOnlyList<UpgradeCard> cards, Action<UpgradeCard> onSelected)
         {
             panel.SetActive(true);
-            title.text = "Choose a mob upgrade";
+            title.text = "ARMY WINS!\nChoose a mob upgrade";
             for (int i = 0; i < buttons.Length; i++)
             {
                 Button button = buttons[i];
@@ -39,6 +39,18 @@ namespace MobMentality.UI
                 UpgradeCard card = cards[i];
                 button.GetComponentInChildren<Text>().text = $"{card.Name}\n{card.Description}\n[{card.Rarity}]";
                 button.onClick.AddListener(() => onSelected(card));
+            }
+        }
+
+        /// <summary>Displays the terminal result after the wizard wins.</summary>
+        public void ShowGameOver()
+        {
+            panel.SetActive(true);
+            title.text = "WIZARD WINS\nGAME OVER";
+            for (int i = 0; i < buttons.Length; i++)
+            {
+                buttons[i].onClick.RemoveAllListeners();
+                buttons[i].gameObject.SetActive(false);
             }
         }
 

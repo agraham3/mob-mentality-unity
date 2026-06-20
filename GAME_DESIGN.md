@@ -9,11 +9,13 @@
 1. Start a wave.
 2. The rival wizard enters the arena.
 3. The mob army pursues and attacks the wizard while he casts spells at them.
-4. Defeating the wizard completes the wave.
+4. Defeating the wizard clearly announces an army victory and completes the wave.
 5. Three upgrade cards appear.
 6. The player chooses one mob upgrade.
 7. The boss wizard automatically upgrades.
 8. The player starts the next wave.
+
+If the wizard defeats every mob unit, the wizard wins and the run ends immediately.
 
 ## Entities
 

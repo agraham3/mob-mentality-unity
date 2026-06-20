@@ -39,6 +39,15 @@ namespace MobMentality.Waves
             gameEvents?.RaiseWaveCompleted(CurrentWave);
         }
 
+        /// <summary>Marks the active wave as lost.</summary>
+        public void FailWave()
+        {
+            if (State != WaveState.Active)
+                throw new InvalidOperationException("Only an active wave can be lost.");
+
+            State = WaveState.Defeated;
+        }
+
         /// <summary>Advances to the next wave after a reward has been resolved.</summary>
         public void PrepareNextWave()
         {

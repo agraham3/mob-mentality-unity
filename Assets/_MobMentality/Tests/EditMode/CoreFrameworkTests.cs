@@ -45,6 +45,21 @@ namespace MobMentality.Tests
 
             Assert.That(game.State, Is.EqualTo(GameState.Reward));
             Assert.That(game.Waves.State, Is.EqualTo(WaveState.Reward));
+            Assert.That(game.LastRoundOutcome, Is.EqualTo(RoundOutcome.ArmyVictory));
+        }
+
+        /// <summary>Verifies that losing the army ends the run with a wizard victory.</summary>
+        [Test]
+        public void DefeatingArmyEndsGame()
+        {
+            var game = new GameManager();
+            game.StartWave();
+
+            game.DefeatArmy();
+
+            Assert.That(game.State, Is.EqualTo(GameState.GameOver));
+            Assert.That(game.Waves.State, Is.EqualTo(WaveState.Defeated));
+            Assert.That(game.LastRoundOutcome, Is.EqualTo(RoundOutcome.WizardVictory));
         }
 
         /// <summary>Verifies that a reward draw produces unique choices.</summary>

@@ -13,6 +13,7 @@ namespace MobMentality.Core
         public event Action<UpgradeCard> CardApplied;
         public event Action<int> MobLeveledUp;
         public event Action<int> BossUpgraded;
+        public event Action<RoundOutcome> RoundEnded;
         public event Action<GameState> GameStateChanged;
 
         /// <summary>Signals that a numbered wave started.</summary>
@@ -29,6 +30,8 @@ namespace MobMentality.Core
         public void RaiseMobLeveledUp(int level) => MobLeveledUp?.Invoke(level);
         /// <summary>Signals that the boss reached a new level.</summary>
         public void RaiseBossUpgraded(int level) => BossUpgraded?.Invoke(level);
+        /// <summary>Signals which side won a resolved round.</summary>
+        public void RaiseRoundEnded(RoundOutcome outcome) => RoundEnded?.Invoke(outcome);
         /// <summary>Signals that the overall run phase changed.</summary>
         public void RaiseGameStateChanged(GameState state) => GameStateChanged?.Invoke(state);
     }

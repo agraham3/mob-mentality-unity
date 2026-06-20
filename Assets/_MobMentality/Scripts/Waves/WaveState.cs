@@ -5,6 +5,7 @@ namespace MobMentality.Waves
     {
         Ready,
         Active,
-        Reward
+        Reward,
+        Defeated
     }
 }

@@ -18,11 +18,19 @@ namespace MobMentality.UI
             if (statusText == null || game == null)
                 return;
 
+            string result = game.LastRoundOutcome switch
+            {
+                RoundOutcome.ArmyVictory => "\nResult: ARMY WINS",
+                RoundOutcome.WizardVictory => "\nResult: WIZARD WINS - GAME OVER",
+                _ => string.Empty
+            };
+
             statusText.text =
                 $"Wave: {game.Waves.CurrentWave}\n" +
                 $"State: {game.State}\n" +
                 $"Mob: Lv {game.MobArmy.Level}  Strength {game.MobArmy.Stats.Strength:0}\n" +
-                $"Boss: Lv {game.BossWizard.Level}  Strength {game.BossWizard.Stats.Strength:0}";
+                $"Boss: Lv {game.BossWizard.Level}  Strength {game.BossWizard.Stats.Strength:0}" +
+                result;
         }
     }
 }

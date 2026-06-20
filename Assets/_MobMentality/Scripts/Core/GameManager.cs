@@ -17,9 +17,11 @@ namespace MobMentality.Core
             MobArmy = new MobArmy(gameEvents: Events);
             BossWizard = new BossWizard(gameEvents: Events);
             State = GameState.Ready;
+            LastRoundOutcome = RoundOutcome.None;
         }
 
         public GameState State { get; private set; }
+        public RoundOutcome LastRoundOutcome { get; private set; }
         public GameEvents Events { get; }
         public WaveManager Waves { get; }
         public CardSystem Cards { get; }
@@ -32,6 +34,7 @@ namespace MobMentality.Core
             if (State != GameState.Ready)
                 throw new InvalidOperationException("The game is not ready to start a wave.");
 
+            LastRoundOutcome = RoundOutcome.None;
             SetState(GameState.Wave);
             return Waves.StartWave();
         }
@@ -43,9 +46,23 @@ namespace MobMentality.Core
                 throw new InvalidOperationException("There is no active wave to complete.");
 
             Waves.CompleteWave();
+            LastRoundOutcome = RoundOutcome.ArmyVictory;
             SetState(GameState.Reward);
+            Events.RaiseRoundEnded(LastRoundOutcome);
             Events.RaiseRewardPhaseStarted();
             return Cards.Draw(3);
+        }
+
+        /// <summary>Ends the run after the wizard defeats every army unit.</summary>
+        public void DefeatArmy()
+        {
+            if (State != GameState.Wave)
+                throw new InvalidOperationException("The army can only be defeated during a wave.");
+
+            Waves.FailWave();
+            LastRoundOutcome = RoundOutcome.WizardVictory;
+            SetState(GameState.GameOver);
+            Events.RaiseRoundEnded(LastRoundOutcome);
         }
 
         /// <summary>Applies the chosen mob card, upgrades the boss, and readies the next wave.</summary>

@@ -13,7 +13,8 @@ The roadmap favors one reviewable gameplay improvement at a time.
 - Spawn one progressively stronger rival wizard
 - Run basic automatic movement and combat
 - Complete a wave when the wizard is defeated
-- Next: add an explicit defeat/retry path when the whole mob dies
+- End the run with a clear wizard victory when the whole mob dies
+- Next: add a restart control after game over
 
 ## 3. Card and upgrade system — first slice complete
 

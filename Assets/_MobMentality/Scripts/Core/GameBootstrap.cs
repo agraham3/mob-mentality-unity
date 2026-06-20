@@ -170,6 +170,13 @@ namespace MobMentality.Core
         {
             mob.Died -= OnMobDied;
             mobs.Remove(mob);
+            if (mobs.Count == 0 && game.State == GameState.Wave)
+            {
+                game.DefeatArmy();
+                ClearChildren(spellRoot);
+                rewards.ShowGameOver();
+                RefreshInterface();
+            }
         }
 
         private void FinishWave()

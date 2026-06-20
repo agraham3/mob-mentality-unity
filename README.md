@@ -39,6 +39,7 @@ Unity writes NUnit-format results to `TestResults.xml` and its execution log to 
 
 - A single progressively stronger rival wizard and automatic combat
 - Wave completion when the wizard is defeated
+- Clear army-victory and wizard-victory results, with game over when the army dies
 - Three distinct reward choices
 - Mob stat upgrades and automatic boss growth
 - HUD for wave, phase, mob strength, and boss strength
