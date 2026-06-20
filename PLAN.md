@@ -10,9 +10,9 @@ The roadmap favors one reviewable gameplay improvement at a time.
 
 ## 2. Core wave loop — first slice complete
 
-- Spawn scaled placeholder enemies
+- Spawn one progressively stronger rival wizard
 - Run basic automatic movement and combat
-- Complete a wave when all enemies are defeated
+- Complete a wave when the wizard is defeated
 - Next: add an explicit defeat/retry path when the whole mob dies
 
 ## 3. Card and upgrade system — first slice complete
@@ -25,7 +25,8 @@ The roadmap favors one reviewable gameplay improvement at a time.
 
 - Share army stats across spawned units
 - Automatically improve the boss after each player choice
-- Next: give the boss a simple milestone encounter and telegraphed attack
+- The boss wizard now fights in every wave using a ranged spell
+- Next: add an uncommon self-clone upgrade for the wizard
 
 ## 5. Basic UI — first slice complete
 
@@ -35,7 +36,7 @@ The roadmap favors one reviewable gameplay improvement at a time.
 ## 6. Playable vertical slice — in progress
 
 - Current: repeatable wave → combat → reward → upgrades → next wave loop
-- Next: add defeat/restart, a short boss milestone, and one meaningful enemy variant
+- Next: add defeat/restart and the wizard's self-clone upgrade
 
 ## 7. Testing and polish — ongoing
 

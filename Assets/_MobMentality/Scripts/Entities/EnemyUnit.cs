@@ -4,12 +4,13 @@ using UnityEngine;
 
 namespace MobMentality.Entities
 {
-    /// <summary>Thin scene adapter for a placeholder enemy's movement and attacks.</summary>
+    /// <summary>Thin scene adapter for the rival wizard's movement and attacks.</summary>
     public sealed class EnemyUnit : MonoBehaviour
     {
         private Stats stats;
         private Health health;
         private float attackTimer;
+        private Action<Vector3, MobUnit, float> castSpell;
 
         public event Action<EnemyUnit> Died;
         public bool IsAlive => health != null && !health.IsDead;
@@ -20,6 +21,17 @@ namespace MobMentality.Entities
             stats = enemyStats;
             health = new Health(stats.MaxHealth);
             attackTimer = 0f;
+            castSpell = null;
+        }
+
+        /// <summary>Initializes the rival wizard with a ranged spell attack.</summary>
+        public void InitializeWizard(Stats wizardStats, Action<Vector3, MobUnit, float> spellAction)
+        {
+            if (spellAction == null)
+                throw new ArgumentNullException(nameof(spellAction));
+
+            Initialize(wizardStats);
+            castSpell = spellAction;
         }
 
         /// <summary>Advances basic nearest-mob movement and combat.</summary>
@@ -40,7 +52,11 @@ namespace MobMentality.Entities
             }
             else if (attackTimer <= 0f)
             {
-                target.TakeDamage(stats.Damage);
+                if (castSpell == null)
+                    target.TakeDamage(stats.Damage);
+                else
+                    castSpell(transform.position, target, stats.Damage);
+
                 attackTimer = 1f / stats.AttackSpeed;
             }
         }

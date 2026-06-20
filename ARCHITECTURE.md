@@ -25,7 +25,7 @@ Assets/_MobMentality/
 
 `WaveManager` validates wave transitions and creates a small scaled `WaveDefinition`. `CardSystem` draws unique cards from the starter deck. `Stats`, `Health`, and `Experience` are independent rule objects.
 
-`GameBootstrap` is the Unity adapter for this intentionally asset-light slice. On play it creates named system markers, placeholder sprites, controls, and UI around the plain C# game model. `MobUnit` and `EnemyUnit` are MonoBehaviours because movement and visual lifetime require transforms and GameObjects.
+`GameBootstrap` is the Unity adapter for this intentionally asset-light slice. On play it creates named system markers, placeholder sprites, controls, and UI around the plain C# game model. `MobUnit`, `EnemyUnit`, and `SpellProjectile` are MonoBehaviours because movement and visual lifetime require transforms and GameObjects.
 
 ## Plain C# versus MonoBehaviour
 

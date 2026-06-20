@@ -23,7 +23,7 @@ namespace MobMentality.Waves
         public static WaveDefinition CreateScaled(int number)
         {
             int safeNumber = Math.Max(1, number);
-            return new WaveDefinition(safeNumber, 2 + safeNumber, 15f + safeNumber * 4f, 2f + safeNumber * 0.5f);
+            return new WaveDefinition(safeNumber, 1, 15f + safeNumber * 4f, 2f + safeNumber * 0.5f);
         }
     }
 }

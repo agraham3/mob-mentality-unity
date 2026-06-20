@@ -2,14 +2,14 @@
 
 ## Concept
 
-`mob-mentality` is a 2D roguelike / wave-survival game about cultivating an unruly little army. The player does not gain direct combat power; choices improve the mob as a group. A rival wizard grows after every reward, creating an escalating race toward a later confrontation.
+`mob-mentality` is a 2D roguelike / wave-survival game about cultivating an unruly little army. The player is the army and pursues a single rival wizard. Choices improve the mob as a group while the wizard grows after every reward.
 
 ## Main loop
 
 1. Start a wave.
-2. Enemies spawn with wave-scaled health and damage.
-3. The mob army automatically moves, attacks, and survives.
-4. Defeating all enemies completes the wave.
+2. The rival wizard enters the arena.
+3. The mob army pursues and attacks the wizard while he casts spells at them.
+4. Defeating the wizard completes the wave.
 5. Three upgrade cards appear.
 6. The player chooses one mob upgrade.
 7. The boss wizard automatically upgrades.
@@ -17,10 +17,9 @@
 
 ## Entities
 
-- **Mob army:** owns shared progression and stats. The current placeholder army spawns three blue units per wave.
+- **Mob army:** the player-controlled side. It owns shared progression and spawns three blue units per wave.
 - **Mob unit:** a simple scene representation that seeks and attacks the nearest living enemy.
-- **Enemy unit:** a red placeholder that seeks and attacks the nearest living mob.
-- **Boss wizard:** a visible purple placeholder and progression model. It does not fight in this first slice.
+- **Boss wizard:** the army's single purple target. He launches visible spells at the nearest living mob and grows after each reward.
 
 ## Upgrade examples
 
@@ -30,7 +29,7 @@
 - **Quick Feet:** increase movement speed.
 - **Long Reach:** increase attack range.
 
-Rarity is displayed now but does not yet affect draw weighting.
+Rarity is displayed now but does not yet affect draw weighting. A future uncommon or rare boss upgrade may allow the wizard to clone himself.
 
 ## Progression
 

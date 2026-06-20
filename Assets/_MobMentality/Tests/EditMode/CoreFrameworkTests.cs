@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using MobMentality.Cards;
 using MobMentality.Core;
 using MobMentality.Entities;
 using MobMentality.Waves;
 using NUnit.Framework;
+using UnityEngine;
 
 namespace MobMentality.Tests
 {
@@ -29,6 +31,7 @@ namespace MobMentality.Tests
 
             Assert.That(waves.State, Is.EqualTo(WaveState.Active));
             Assert.That(definition.Number, Is.EqualTo(1));
+            Assert.That(definition.EnemyCount, Is.EqualTo(1));
         }
 
         /// <summary>Verifies wave completion opens rewards.</summary>
@@ -67,6 +70,33 @@ namespace MobMentality.Tests
 
             Assert.That(army.Stats.Damage, Is.EqualTo(startingDamage + 3f));
             Assert.That(army.Level, Is.EqualTo(2));
+        }
+
+        /// <summary>Verifies that the rival wizard delegates its attack to the spell action.</summary>
+        [Test]
+        public void RivalWizardCastsSpellAtMobInRange()
+        {
+            var wizardObject = new GameObject("Test Rival Wizard");
+            var mobObject = new GameObject("Test Mob");
+
+            try
+            {
+                EnemyUnit wizard = wizardObject.AddComponent<EnemyUnit>();
+                MobUnit mob = mobObject.AddComponent<MobUnit>();
+                mobObject.transform.position = Vector3.right;
+                mob.Initialize(new Stats(10f, 1f, 1f, 1f, 1f));
+                int spellsCast = 0;
+                wizard.InitializeWizard(new Stats(10f, 2f, 1f, 1f, 3f), (origin, target, damage) => spellsCast++);
+
+                wizard.Tick(new List<MobUnit> { mob }, 0f);
+
+                Assert.That(spellsCast, Is.EqualTo(1));
+            }
+            finally
+            {
+                Object.DestroyImmediate(wizardObject);
+                Object.DestroyImmediate(mobObject);
+            }
         }
 
         /// <summary>Verifies the automatic boss growth rule.</summary>

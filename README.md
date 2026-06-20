@@ -1,6 +1,6 @@
 # mob-mentality
 
-`mob-mentality` is a Unity 6 2D roguelike / wave-survival prototype. The player commands a small mob army rather than becoming stronger directly. Surviving each wave presents three army upgrade cards, while a rival boss wizard automatically grows stronger after every choice.
+`mob-mentality` is a Unity 6 2D roguelike / wave-survival prototype. The player is a small mob army pursuing a single rival wizard. Surviving each wave presents three army upgrade cards, while the wizard automatically grows stronger after every choice.
 
 This first vertical slice uses generated square sprites and deliberately simple nearest-target combat. There are no external art assets, paid packages, networking, saves, audio, or procedural levels.
 
@@ -13,7 +13,7 @@ This first vertical slice uses generated square sprites and deliberately simple 
 
 ## Play
 
-Open `Assets/_MobMentality/Scenes/Main.unity` and press **Play**. Click **Start Wave** or press Space. Blue mob units automatically approach and fight red enemies. When every enemy is defeated, select one of the three upgrade cards. The mob and boss strengths update, and the next wave button becomes available.
+Open `Assets/_MobMentality/Scenes/Main.unity` and press **Play**. Click **Start Wave** or press Space. The blue player army automatically pursues the single purple wizard while he launches ranged spells at them. When the wizard is defeated, select one of the three upgrade cards. The mob and wizard strengths update, and the next wave button becomes available.
 
 The **Debug: Complete** button (or C key) skips the remaining combat so the reward loop is easy to inspect.
 
@@ -37,8 +37,8 @@ Unity writes NUnit-format results to `TestResults.xml` and its execution log to 
 
 ## Current scope
 
-- Wave-scaled enemy spawning and automatic placeholder combat
-- Wave completion after the last enemy dies
+- A single progressively stronger rival wizard and automatic combat
+- Wave completion when the wizard is defeated
 - Three distinct reward choices
 - Mob stat upgrades and automatic boss growth
 - HUD for wave, phase, mob strength, and boss strength

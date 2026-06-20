@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using MobMentality.Entities;
 using MobMentality.UI;
-using MobMentality.Waves;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +18,7 @@ namespace MobMentality.Core
         private Button completeButton;
         private Transform mobRoot;
         private Transform enemyRoot;
+        private Transform spellRoot;
         private Sprite squareSprite;
 
         private void Start()
@@ -52,9 +52,8 @@ namespace MobMentality.Core
             mobRoot.SetParent(transform);
             enemyRoot = new GameObject("Enemies").transform;
             enemyRoot.SetParent(transform);
-
-            GameObject boss = CreateSquare("BossWizard", new Vector2(7f, 3.5f), new Color(0.65f, 0.25f, 0.95f), 1.25f);
-            boss.transform.SetParent(transform);
+            spellRoot = new GameObject("Spells").transform;
+            spellRoot.SetParent(transform);
         }
 
         private void CreateArena()
@@ -109,15 +108,16 @@ namespace MobMentality.Core
             if (game.State != GameState.Ready)
                 return;
 
-            WaveDefinition definition = game.StartWave();
+            game.StartWave();
             SpawnMobs();
-            SpawnEnemies(definition);
+            SpawnWizard();
             RefreshInterface();
         }
 
         private void SpawnMobs()
         {
             ClearChildren(mobRoot);
+            ClearChildren(spellRoot);
             mobs.Clear();
             for (int i = 0; i < 3; i++)
             {
@@ -130,21 +130,24 @@ namespace MobMentality.Core
             }
         }
 
-        private void SpawnEnemies(WaveDefinition definition)
+        private void CastSpell(Vector3 origin, MobUnit target, float damage)
+        {
+            GameObject spellObject = CreateSquare("Wizard Spell", origin, new Color(0.85f, 0.4f, 1f), 0.22f);
+            spellObject.transform.SetParent(spellRoot);
+            SpellProjectile spell = spellObject.AddComponent<SpellProjectile>();
+            spell.Initialize(target, damage, 7f);
+        }
+
+        private void SpawnWizard()
         {
             ClearChildren(enemyRoot);
             enemies.Clear();
-            for (int i = 0; i < definition.EnemyCount; i++)
-            {
-                float y = -2.6f + (i % 5) * 1.3f;
-                float x = 3.5f + (i / 5) * 1.1f;
-                GameObject enemyObject = CreateSquare($"Enemy {i + 1}", new Vector2(x, y), new Color(0.95f, 0.25f, 0.25f), 0.68f);
-                enemyObject.transform.SetParent(enemyRoot);
-                EnemyUnit enemy = enemyObject.AddComponent<EnemyUnit>();
-                enemy.Initialize(new Stats(definition.EnemyHealth, definition.EnemyDamage, 0.7f, 1.35f, 0.85f));
-                enemy.Died += OnEnemyDied;
-                enemies.Add(enemy);
-            }
+            GameObject wizardObject = CreateSquare("Boss Wizard", new Vector2(4f, 0f), new Color(0.65f, 0.25f, 0.95f), 1.1f);
+            wizardObject.transform.SetParent(enemyRoot);
+            EnemyUnit wizard = wizardObject.AddComponent<EnemyUnit>();
+            wizard.InitializeWizard(game.BossWizard.Stats.Clone(), CastSpell);
+            wizard.Died += OnEnemyDied;
+            enemies.Add(wizard);
         }
 
         private void TickCombat(float deltaTime)
